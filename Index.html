@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For San | Happy Valentine's Day</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&family=Alex+Brush&display=swap" rel="stylesheet">
+    <style>
+        /* --- Color Palette & Variables --- */
+        :root {
+            --ivory: #FFFAF0;
+            --blush: #F4C2C2;
+            --rose-gold: #B76E79;
+            --deep-red: #8B0000;
+            --text-dark: #2C2C2C;
+            --text-light: #5A5A5A;
+        }
+
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--ivory);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--deep-red);
+        }
+
+        /* --- Welcome Screen --- */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, var(--ivory) 0%, var(--blush) 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .welcome-content h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        .welcome-content p {
+            color: var(--text-light);
+            font-size: 1.2em;
+            animation: pulseText 2s infinite;
+        }
+        @keyframes pulseText {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* --- Smooth Scroll Reveal --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Audio Button --- */
+        #music-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--rose-gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            color: var(--deep-red);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(183, 110, 121, 0.1);
+        }
+        #music-toggle:hover {
+            background: var(--rose-gold);
+            color: white;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #ffffff 0%, var(--blush) 100%);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            z-index: 2;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.8);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: var(--text-light);
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        /* Floating Light Particles */
+        #particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        /* --- Sections Layout --- */
+        section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.8em;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        section h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--rose-gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- Our Story (Timeline) --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--blush);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            background: inherit;
+            width: 50%;
+        }
+        .timeline-item.left { left: 0; text-align: right; }
+        .timeline-item.right { left: 50%; text-align: left; }
+        
+        .timeline-content {
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(183, 110, 121, 0.1);
+        }
+        .timeline-content h3 { color: var(--rose-gold); margin-bottom: 10px; font-size: 1.5em; }
+
+        /* --- Why I Love You (Cards) --- */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .reason-card {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-top: 4px solid var(--rose-gold);
+        }
+        .reason-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(183, 110, 121, 0.15);
+        }
+
+        /* --- Memories Gallery (Polaroid Style) --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .gallery-item {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            border-radius: 5px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, z-index 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:nth-child(odd) { transform: rotate(-3deg); }
+        .gallery-item:nth-child(even) { transform: rotate(3deg); }
+        
+        .gallery-item:hover {
+            transform: rotate(0deg) scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 30px rgba(183, 110, 121, 0.2);
+            z-index: 10;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #fdfbfb;
+            border: 1px dashed var(--blush);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rose-gold);
+            font-style: italic;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item p {
+            font-family: 'Alex Brush', cursive;
+            font-size: 1.6em;
+            color: var(--deep-red);
+            margin-top: 10px;
+            margin-bottom: -20px;
+            line-height: 1;
+        }
+
+        /* --- Love Letter --- */
+        .love-letter-wrapper {
+            background: white;
+            padding: 60px;
+            border-radius: 5px;
+            box-shadow: inset 0 0 50px rgba(244, 194, 194, 0.2), 0 15px 35px rgba(0,0,0,0.05);
+            margin-top: 30px;
+        }
+        .love-letter-text {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.2em;
+            line-height: 1.8;
+            color: var(--deep-red);
+            text-align: center;
+        }
+
+        /* --- Video Section --- */
+        .video-section {
+            background: linear-gradient(135deg, var(--ivory), var(--blush));
+            border-radius: 20px;
+            padding: 60px 20px;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .video-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(183, 110, 121, 0.2);
+            background: #000;
+            margin-top: 30px;
+            border: 4px solid white;
+        }
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Animations --- */
+        .heartbeat-icon {
+            font-size: 3em;
+            color: var(--deep-red);
+            animation: heartbeat 2s infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.2); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.2); }
+            60% { transform: scale(1); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--text-dark);
+            color: var(--ivory);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2em; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.left, .timeline-item.right { left: 0; text-align: left; }
+            .love-letter-wrapper { padding: 30px; }
+            .love-letter-text { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <div class="heartbeat-icon">💌</div>
+            <h2>For San</h2>
+            <p>Tap anywhere to open your Valentine's gift...</p>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="AnalMele.mp3" type="audio/mpeg">
+    </audio>
+    
+    <button id="music-toggle" onclick="toggleMusic()">Play Music 🎵</button>
+
+    <header class="hero">
+        <div id="particles-container"></div>
+        <h1 class="reveal">Every love story is beautiful,<br>but ours is my favorite.</h1>
+        <p class="reveal" style="transition-delay: 0.3s;">San, you are my peace, my passion, and my everything.</p>
+    </header>
+
+    <section class="our-story">
+        <h2 class="reveal">Our Story</h2>
+        <div class="timeline">
+            <div class="timeline-item left reveal">
+                <div class="timeline-content">
+                    <h3>The Beginning</h3>
+                    <p>The day you walked into my life, everything changed for the better. The colors were brighter, and my smile was wider.</p>
+                </div>
+            </div>
+            <div class="timeline-item right reveal">
+                <div class="timeline-content">
+                    <h3>Falling in Love</h3>
+                    <p>It wasn't just one moment, but a million little moments. The way you laugh, the way you care, the way you simply are.</p>
+                </div>
+            </div>
+            <div class="timeline-item left reveal">
+                <div class="timeline-content">
+                    <h3>Growing Together</h3>
+                    <p>Through every up and down, we've only grown stronger. Building dreams and sharing silence, side by side.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reasons">
+        <h2 class="reveal">Why I Love You</h2>
+        <div class="reasons-grid">
+            <div class="reason-card reveal">
+                <p>"I love the warmth of your heart and the endless kindness you show to everyone around you."</p>
+            </div>
+            <div class="reason-card reveal" style="transition-delay: 0.2s;">
+                <p>"I love how your smile can instantly turn my worst days into my best ones."</p>
+            </div>
+            <div class="reason-card reveal" style="transition-delay: 0.4s;">
+                <p>"I love that I can be completely myself when I am with you. You are my safe place."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="memories">
+        <h2 class="reveal">Our Memories</h2>
+        <p class="reveal" style="margin-bottom: 30px; color: var(--text-light);">Moments frozen in time, but alive in my heart.</p>
+        
+        <div class="gallery">
+            <div class="gallery-item reveal">
+                <div class="Ourfirstdate">
+                   
+                </div>
+                <p>Our first date</p>
+            </div>
+            
+            <div class="gallery-item reveal" style="transition-delay: 0.2s;">
+                <div class="image-placeholder">
+                    
+                </div>
+                <p>Happytimes</p>
+            </div>
+            
+            <div class="gallery-item reveal" style="transition-delay: 0.4s;">
+                <div class="Justus">
+                    
+                </div>
+                <p>Just us</p>
+            </div>
+            
+            <div class="gallery-item reveal" style="transition-delay: 0.6s;">
+                <div class="forever">
+                  
+                </div>
+                <p>Forever</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="love-letter">
+        <h2 class="reveal">A Note for You</h2>
+        <div class="love-letter-wrapper reveal">
+            <p class="love-letter-text">
+                My dearest San,<br><br>
+                Words often fail to capture exactly how much you mean to me. You are the dream I never knew I had, and the reality I never want to wake up from.<br><br>
+                Happy Valentine's Day.<br>
+                Always and forever yours.
+            </p>
+        </div>
+    </section>
+
+    <section class="video-section reveal">
+        <h2>A Special Moment</h2>
+        <p style="color: var(--text-dark); font-size: 1.1em;">Press play to watch a little something I put together for you.</p>
+        
+        <div class="video-container">
+            <video controls preload="metadata">
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <footer>
+        <p>"With you, forever doesn’t feel long enough."</p>
+        <div class="signature">Valentine's Day 2026<br><br>Mohankumar</div>
+    </footer>
+
+    <script>
+        const music = document.getElementById("bg-music");
+        const musicBtn = document.getElementById("music-toggle");
+        const welcomeScreen = document.getElementById("welcome-screen");
+        let isPlaying = false;
+
+        music.volume = 0.4; 
+
+        // Welcome Screen Logic
+        welcomeScreen.addEventListener("click", function() {
+            music.play().catch(e => console.log("Audio play blocked"));
+            isPlaying = true;
+            musicBtn.innerText = "Pause Music ⏸️";
+            
+            welcomeScreen.style.opacity = "0";
+            setTimeout(() => {
+                welcomeScreen.style.display = "none";
+                // Trigger reveal for hero section specifically after entering
+                reveal();
+            }, 1500);
+        });
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerText = "Play Music 🎵";
+            } else {
+                music.play();
+                musicBtn.innerText = "Pause Music ⏸️";
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Scroll Reveal Logic
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                let windowHeight = window.innerHeight;
+                let elementTop = reveals[i].getBoundingClientRect().top;
+                let elementVisible = 50; 
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        // Particle Generation
+        const container = document.getElementById('particles-container');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            let size = Math.random() * 8 + 4; 
+            let left = Math.random() * 100; 
+            let duration = Math.random() * 10 + 8; 
+            let delay = Math.random() * 15; 
+
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = left + 'vw';
+            particle.style.animationDuration = duration + 's';
+            particle.style.animationDelay = delay + 's';
+
+            container.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
